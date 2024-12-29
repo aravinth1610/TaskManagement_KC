@@ -1,0 +1,6 @@
+/home/aravinth/Applications/Project/workSpace/TaskManagement/Domain/src/main/java/com/task/enums/WorkType.java
+/home/aravinth/Applications/Project/workSpace/TaskManagement/Domain/src/main/java/com/task/modal/AuditEntity.java
+/home/aravinth/Applications/Project/workSpace/TaskManagement/Domain/src/main/java/com/task/modal/StandardTask.java
+/home/aravinth/Applications/Project/workSpace/TaskManagement/Domain/src/main/java/com/task/modal/TimeSheet.java
+/home/aravinth/Applications/Project/workSpace/TaskManagement/Domain/src/main/java/com/task/repositories/StandardTaskRepositories.java
+/home/aravinth/Applications/Project/workSpace/TaskManagement/Domain/src/main/java/com/task/repositories/TimeSheetRepositories.java

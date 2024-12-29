@@ -1,0 +1,37 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /auth-key  
+
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root #hide
+    password: Ram16102000@ #hide   
+    url: jdbc:mariadb://localhost:3306/eazybank?useSSL=false
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: ${oauth2.auth-base-url}/realms/${oauth2.realm}/protocol/openid-connect/${oauth2.access-type}
+
+oauth2:
+  realm: springboot-be_test
+  admin:
+    password: admin #hide
+    username: admin #hide
+  auth-base-url: http://localhost:8080
+  client-id: admin-cli #hide
+  grant-type: client_credentials
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0  # in productionn 2.6
+  

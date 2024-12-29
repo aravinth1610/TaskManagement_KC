@@ -1,0 +1,27 @@
+{
+	"realm": "springboot-be_test",
+	"auth-server-url": "http://localhost:8080/",
+	"resource": "springboot-dev_test",
+	"credentials": {
+		"secret": "1m9BZhj5JmA9xn03AiIq9r2Km1grKtpa"
+	},
+	"http-method-as-scope": true,
+	"paths": [
+		{
+			"path": "/swagger-ui/*",
+			"enforcement-mode": "DISABLED"
+		},
+		{
+			"path": "/v3/*",
+			"enforcement-mode": "DISABLED"
+		},
+		{
+			"path": "/notices",
+			"enforcement-mode": "DISABLED"
+		},
+		{
+			"path": "/protocol/openid-connect/*",
+			"enforcement-mode": "DISABLED"
+		}
+	]
+}
