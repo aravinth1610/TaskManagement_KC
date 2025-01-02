@@ -32,10 +32,6 @@ public class AuthenticationPreFilter extends AbstractGatewayFilterFactory<Authen
 		this.webClientConfig = webClientConfig;
 	}
 
-
-	String clientId = "springboot-dev_test";
-	String clientSecret = "1m9BZhj5JmA9xn03AiIq9r2Km1grKtpa";
-	
 	 @Override
 	 public GatewayFilter apply(Config config) {
 	        return (exchange, chain) -> {
@@ -46,7 +42,7 @@ public class AuthenticationPreFilter extends AbstractGatewayFilterFactory<Authen
 	            
 	            if(isSecured.test(request)) {
 		            String accessToken = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-		            accessToken = accessToken.substring(TOKEN_PREFIX.length()).trim();	            	
+		      //      accessToken = accessToken.substring(TOKEN_PREFIX.length()).trim();	            	
 	                return  webClientConfig.tokenValidationAPIExchange(headerHandler(accessToken), exchange,chain);
 	            }
 	            return chain.filter(exchange);

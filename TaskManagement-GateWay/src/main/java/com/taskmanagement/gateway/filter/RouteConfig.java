@@ -13,21 +13,23 @@ public class RouteConfig {
 		return builder.routes()
 				.route("Authkey",
 						r -> r.path("/auth-key/**")
-								.filters(f ->
+						
+//								.filters(f ->
 								//f.rewritePath("/authentication-service(?<segment>/?.*)", "$\\{segment}")
-								f.filter(authFilter.apply(new AuthenticationPreFilter.Config())))
-								.uri("lb://Authkey"))
+//								f.filter(authFilter.apply(new AuthenticationPreFilter.Config())))
+								.uri("lb://TaskManagement-GateWay")
+								)
 				.route("TimeSheet",
 						r -> r.path("/task-management/**")
-								.filters(f -> 
+//								.filters(f -> 
 								        //f.rewritePath("/user-service(?<segment>/?.*)", "$\\{segment}")
-										f.filter(authFilter.apply(new AuthenticationPreFilter.Config())))
+//										f.filter(authFilter.apply(new AuthenticationPreFilter.Config())))
 								.uri("lb://TimeSheet"))
 				.route("ClockData",
 						r -> r.path("/clock-data/**")
-								.filters(f -> 
+//								.filters(f -> 
 								        //f.rewritePath("/user-service(?<segment>/?.*)", "$\\{segment}")
-										f.filter(authFilter.apply(new AuthenticationPreFilter.Config())))
+//										f.filter(authFilter.apply(new AuthenticationPreFilter.Config())))
 								.uri("lb://ClockData"))
 				.route("TaskManagement-Registry",
 						r -> r.path("/task/eureka/web")

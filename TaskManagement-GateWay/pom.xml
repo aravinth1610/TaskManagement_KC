@@ -30,6 +30,9 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2024.0.0</spring-cloud.version>
+		<Esecurity>
+			/home/aravinth/Applications/Project/workSpace/TM-Project/auth_key/Esecurity/target/Esecurity-0.0.1.jar</Esecurity>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,6 +65,14 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.authKey</groupId>
+			<artifactId>Esecurity</artifactId>
+			<version>0.0.1</version>
+			<scope>system</scope>
+			<type>jar</type>
+			<systemPath>${Esecurity}</systemPath>
 		</dependency>
 	</dependencies>
 

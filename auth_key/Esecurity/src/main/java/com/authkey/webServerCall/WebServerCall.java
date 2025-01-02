@@ -6,13 +6,12 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.uniCore.customeExceptions.ForbiddenException;
 
 import com.unicore.customeExceptions.UnauthorizedException;
 
@@ -55,13 +54,14 @@ public class WebServerCall {
           String errorDescription = (String) errorResponse.get("error_description");
    
           if (response.statusCode() == HttpStatus.UNAUTHORIZED) {
-              return Mono.error(new AccessDeniedException("Unauthorized: " + errorDescription));
+              return Mono.error(new UnauthorizedException("Unauthorized: " + errorDescription));
           }else if (response.statusCode() == HttpStatus.FORBIDDEN) {
-              return Mono.error(new UnauthorizedException("Forbidden: " + errorDescription));
+              return Mono.error(new ForbiddenException("Forbidden: " + errorDescription));
           }else if (response.statusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
               return Mono.error(new RuntimeException("Internal Server Error: " + errorDescription));
-          }
+          }else {
           return Mono.error(new RuntimeException(error + " - " + errorDescription));
+          }
       });
 	}
 

@@ -39,7 +39,7 @@ public class TokenServicesImpl implements TokenService{
 		} else if (refreshToken != null) {
 			urlEncodedData.add("refresh_token", refreshToken);
 		}
-		return keyclockWebCall.keyclockTokenWebCall(realm, urlEncodedData, tokenHeaderHandler());
+		return keyclockWebCall.keyclockTokenWebCall(realm, urlEncodedData, urlencodedHeaderHandler());
 	}
 	
 	public Map<String, Object> introspect(String token) {
@@ -51,11 +51,11 @@ public class TokenServicesImpl implements TokenService{
 		String realm = TokenUtil.extractRealm(claims);
 		String clientId = TokenUtil.extractClientId(claims);
 		
-	    Set<Map<String, Object>> clients = keyclockWebCall.keyclockAdminClientsWebCall(realm, adminHeaderHandler(token));
+	    Set<Map<String, Object>> clients = keyclockWebCall.keyclockAdminClientsWebCall(realm, jsonHeaderHandler(token));
 			
 	    String clientUUID = getClientUUID(clients, clientId);
 	    
-	    String clientSecret = getClientSecret(keyclockWebCall.keyclockAdminClientSecret(realm, clientUUID, adminHeaderHandler(token)));
+	    String clientSecret = getClientSecret(keyclockWebCall.keyclockAdminClientSecret(realm, clientUUID, jsonHeaderHandler(token)));
 		
 		MultiValueMap<String, String> urlEncodedData = new LinkedMultiValueMap<String, String>();
 
@@ -63,7 +63,7 @@ public class TokenServicesImpl implements TokenService{
 		urlEncodedData.add("client_secret", clientSecret);
 		urlEncodedData.add("token", token);
 		
-		Map<String, Object> user =  keyclockWebCall.keyclockTokenIntrospectWebCall(realm, urlEncodedData, tokenHeaderHandler());;
+		Map<String, Object> user =  keyclockWebCall.keyclockTokenIntrospectWebCall(realm, urlEncodedData, urlencodedHeaderHandler());;
 		
 	    if(TokenUtil.validateToken(user)) {
 	        return Map.of("user", TokenUtil.extractSub(user));
@@ -89,13 +89,13 @@ public class TokenServicesImpl implements TokenService{
 		}
 	}
 
-	private HttpHeaders tokenHeaderHandler() {
+	private HttpHeaders urlencodedHeaderHandler() {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
 		return httpHeaders;
 	}
 	
-	private HttpHeaders adminHeaderHandler(String token) {
+	private HttpHeaders jsonHeaderHandler(String token) {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
 		httpHeaders.add(HttpHeaders.AUTHORIZATION, TOKEN_PREFIX.concat(token));
